@@ -5,7 +5,11 @@ import * as _ from 'lodash';
 import { breakpoints } from "../../styles";
 
 interface BannerProps {
+    config: any;
+};
 
+interface BannerSloganProps {
+    imageUrl: string;
 };
 
 const StyledHeader = styled.header`
@@ -23,18 +27,20 @@ const StyledHeader = styled.header`
 	}
 `;
 
-const StyledHeaderSlogan = styled.div`
+const StyledHeaderSlogan = styled.div<BannerSloganProps>`
     height: 200px;
     width: 200px;
-    background-image: url('/images/slogan.svg');
+    background-image: ${props => `url(${props.imageUrl})`};
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 `;
 
-const Banner: React.FC<BannerProps> = () => (
+const Banner: React.FC<BannerProps> = ({
+    config
+}) => (
     <StyledHeader>
-        <StyledHeaderSlogan />
+        <StyledHeaderSlogan imageUrl={config.image.url} />
     </StyledHeader>
 );
 

@@ -18,6 +18,7 @@ interface StyledLinkProps {
 }
 
 interface StyledHighlighterProps {
+    width: string;
     activeLink: NavbarLink;
 }
 
@@ -65,7 +66,7 @@ const StyledNavbarLink = styled.div<StyledLinkProps>`
 
 const StyledNavbarHighlighter = styled.div<StyledHighlighterProps>`
     position: absolute;
-    width: 25%;
+    width: ${props => props.width};
     height: 2px;
     border-bottom: 2px solid;
     border-color: ${props => _.get(props, `theme.links.${props.activeLink.title}.color`)};
@@ -89,11 +90,13 @@ const getCurrentLinkConfig = (links: Array<NavbarLink>, pathname: string): Navba
         route: '',
         left: '0%'
     });
+const getHighlighterWidth = (links: Array<NavbarLink>) => `${100 / links.length}%`;
 
 function Navbar(props: NavbarProps ) {
     const { links } = props;
     const location = useLocation();
     const activeLink: NavbarLink = getCurrentLinkConfig(links, location.pathname);
+    const highlighterWidth = getHighlighterWidth(links);
 
     return (
         <StyledNavbar>
@@ -107,7 +110,7 @@ function Navbar(props: NavbarProps ) {
                         </StyledNavbarLink>
                     </StyledNavbarItem>
                 ))}
-                <StyledNavbarHighlighter activeLink={activeLink} />
+                <StyledNavbarHighlighter width={highlighterWidth} activeLink={activeLink} />
             </StyledNavbarList>
         </StyledNavbar>
     );

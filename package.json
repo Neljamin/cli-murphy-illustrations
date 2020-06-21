@@ -1,5 +1,6 @@
 {
   "name": "cli-murphy-illustrations",
+  "homepage": "https://neljamin.github.io/cli-murphy-illustrations",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,10 +40,14 @@
     ]
   },
   "devDependencies": {
+    "@apollo/react-hooks": "^3.1.5",
     "@types/lodash": "^4.14.155",
     "@types/react-helmet": "^6.0.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
+    "apollo-boost": "^0.4.9",
+    "gh-pages": "^3.1.0",
+    "graphql": "^15.1.0",
     "react-helmet-async": "^1.0.6",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.1.1"

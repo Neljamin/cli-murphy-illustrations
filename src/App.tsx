@@ -1,40 +1,72 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { HelmetProvider } from 'react-helmet-async';
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { HelmetProvider } from "react-helmet-async";
 import { HashRouter as Router, Route } from "react-router-dom";
+import { ApolloProvider, useQuery } from "@apollo/react-hooks";
 
-import AppHelmet from './AppHelmet';
-import AppGlobalStyles from './AppGlobalStyles';
-import { Banner, Navbar } from './components/presentational';
-import { theme } from './styles';
+import AppHelmet from "./AppHelmet";
+import AppGlobalStyles from "./AppGlobalStyles";
+import { Banner, Navbar } from "./components/presentational";
+import { theme } from "./styles";
+import ApolloClient, { gql } from "apollo-boost";
 
-const LINKS = [
-  { title: 'About', route: '/' },
-  { title: 'Books', route: '/books' },
-  { title: 'Illustrations', route: '/illustrations' },
-  { title: 'Contact', route: '/contact' },
-];
+const client = new ApolloClient({
+	uri:
+		"https://api-eu-central-1.graphcms.com/v2/ckbooav750jy301yz2jyr4idd/master",
+});
+
+const APP_STRUCTURE_QUERY = gql`
+	{
+		banners {
+			title
+			image {
+				url
+			}
+		}
+		links {
+			title,
+			route
+		}
+	}
+`;
 
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <HelmetProvider>
-        <AppHelmet />
-      </HelmetProvider>
-      <AppGlobalStyles />
-      <Router>
-        <Banner />
-        <Navbar links={LINKS} />
-        {
-          LINKS.map(link => (
-            <Route key={link.route} path={link.route} exact={link.route === "/"}>
-              {link.title}
-            </Route>
-          ))
-        }
-      </Router>
-    </ThemeProvider>
-  );
+	const { loading, error, data } = useQuery(APP_STRUCTURE_QUERY);
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error :(</p>;
+
+	const { banners, links } = data;
+
+	return (
+		<Router>
+			<Banner config={banners[0]} />
+			<Navbar links={links} />
+			{links.map((link: any) => (
+				<Route
+					key={link.route}
+					path={link.route}
+					exact={link.route === "/"}
+				>
+					{link.title}
+				</Route>
+			))}
+		</Router>
+	);
 }
 
-export default App;
+function AppProvider() {
+	return (
+		<ApolloProvider client={client}>
+			<ThemeProvider theme={theme}>
+				<HelmetProvider>
+					<AppHelmet />
+				</HelmetProvider>
+				<AppGlobalStyles />
+				<App />
+			</ThemeProvider>
+		</ApolloProvider>
+	);
+}
+
+export default AppProvider;
