@@ -21,6 +21,7 @@ const StyledHeader = styled.header`
     align-items: center;
     flex-direction: column;
     background-color: ${props => _.get(props.theme, 'banner.background')};
+    border-bottom: 2px dashed ${props => _.get(props.theme, 'banner.border')};
 
 	@media ${breakpoints.tablet} {
 		font-size: 32px;

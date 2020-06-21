@@ -24,8 +24,10 @@ interface StyledHighlighterProps {
 
 const StyledNavbar = styled.div`
     display: flex;
+    margin-top: 16px;
     justify-content: center;
     align-items: center;
+    overflow: hidden; 
 `;
 
 const StyledNavbarList = styled.ul`

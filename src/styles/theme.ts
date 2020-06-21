@@ -12,14 +12,19 @@ const colors = {
 	green: "#B5EAD7",
 	darkGreen: "#77bb36",
     blue: "#4db7ff",
-    purple: '#EAD2FE'
+    purple: '#EAD2FE',
+    darkPurple: '#9b23ff',
 };
 
 const applyAlpha: (color: string, alpha: string) => string = (color, alpha) => `${color}${alpha}`;
 
 const theme = {
     banner: {
-        background: colors.purple
+        background: colors.purple,
+        border: colors.darkPurple,
+    },
+    textbox: {
+        background: colors.yellow,
     },
     links: {
         About: {

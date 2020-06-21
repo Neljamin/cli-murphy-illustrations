@@ -6,7 +6,7 @@ import { ApolloProvider, useQuery } from "@apollo/react-hooks";
 
 import AppHelmet from "./AppHelmet";
 import AppGlobalStyles from "./AppGlobalStyles";
-import { Banner, Navbar } from "./components/presentational";
+import { Banner, Navbar, Page } from "./components/presentational";
 import { theme } from "./styles";
 import ApolloClient, { gql } from "apollo-boost";
 
@@ -48,7 +48,9 @@ function App() {
 					path={link.route}
 					exact={link.route === "/"}
 				>
-					{link.title}
+					<Page content={{
+						title: link.title
+					}} />
 				</Route>
 			))}
 		</Router>

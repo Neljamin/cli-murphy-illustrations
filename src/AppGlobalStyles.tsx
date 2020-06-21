@@ -102,6 +102,7 @@ export default createGlobalStyle`
         font: inherit;
         vertical-align: baseline;
         font-family: 'Poiret One', cursive;
+        box-sizing: border-box;
     }
 
     /* HTML5 display-role reset for older browsers */
@@ -154,5 +155,37 @@ export default createGlobalStyle`
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+
+    h1 {
+        font-size: 36px;
+        line-height: 40px;
+    }
+
+    h2 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    h3 {
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+    h4 {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    /* Won't be used here */
+
+    h5 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    h6 {
+        font-size: 12px;
+        line-height: 20px;
     }
 `;
