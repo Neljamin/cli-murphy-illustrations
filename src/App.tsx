@@ -9,8 +9,16 @@ import AppGlobalStyles from "./AppGlobalStyles";
 import { Banner, Navbar, Page } from "./components/presentational";
 import { theme } from "./styles";
 import ApolloClient, { gql } from "apollo-boost";
+import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
+import introspectionQueryResultData from './fragmentTypes.json';
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  	introspectionQueryResultData
+});
+const cache = new InMemoryCache({ fragmentMatcher });
 
 const client = new ApolloClient({
+	cache,
 	uri:
 		"https://api-eu-central-1.graphcms.com/v2/ckbooav750jy301yz2jyr4idd/master",
 });
@@ -24,7 +32,8 @@ const APP_STRUCTURE_QUERY = gql`
 			}
 		}
 		links {
-			title,
+			id
+			title
 			route
 		}
 	}
@@ -48,9 +57,7 @@ function App() {
 					path={link.route}
 					exact={link.route === "/"}
 				>
-					<Page content={{
-						title: link.title
-					}} />
+					<Page link={link} />
 				</Route>
 			))}
 		</Router>

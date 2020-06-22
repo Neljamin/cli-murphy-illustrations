@@ -23,10 +23,8 @@ const StyledImageFrame = styled.div`
 	transform: rotate(1deg);
 `;
 
-const StyledImage = styled.div`
-	/* display: flex; */
-	/* padding: 8px; */
-	background: url('https://ca-times.brightspotcdn.com/dims4/default/4efe3d9/2147483647/strip/true/crop/1708x1086+0+0/resize/840x534!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F1c%2Fec%2F0738d3364b64b31305e287abff20%2Fhttps-delivery.gettyimages.com%2Fdownloads%2F946416208.jpg');
+const StyledImage = styled.div<ImageProps>`
+	background: url(${props => props.url});
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
@@ -50,7 +48,7 @@ const Clip = () => (
 
 const Page: React.FC<ImageProps> = ({ url }) => (
 	<StyledImageFrame>
-		<StyledImage />
+		<StyledImage url={url} />
 		<Clip />
 	</StyledImageFrame>
 );

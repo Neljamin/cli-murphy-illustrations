@@ -20,7 +20,7 @@ const applyAlpha: (color: string, alpha: string) => string = (color, alpha) => `
 
 const theme = {
     banner: {
-        background: colors.purple,
+        background: colors.white,
         border: colors.darkPurple,
     },
     textbox: {

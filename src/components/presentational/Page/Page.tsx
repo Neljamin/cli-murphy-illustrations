@@ -1,12 +1,19 @@
 import * as React from "react";
+import * as _ from 'lodash';
 import styled from "styled-components";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
 import Image from "./Image";
-import Textbox from './Textbox';
-import { breakpoints } from '../../../styles';
+import Textbox from "./Textbox";
+import { breakpoints } from "../../../styles";
 
 interface PageProps {
-	content: any;
+	link: any;
+}
+
+interface PageItemProps {
+	config: any;
 }
 
 const StyledPageWrapper = styled.div`
@@ -18,7 +25,6 @@ const StyledPageWrapper = styled.div`
 const StyledPage = styled.div`
 	display: flex;
 	max-width: 800px;
-	min-height: 400px;
 	padding: 8px;
 	margin: 16px 0 32px 0;
 	justify-content: center;
@@ -30,29 +36,64 @@ const StyledPage = styled.div`
 	}
 `;
 
-const DUMMY_TEXT = `
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-	at porttitor lectus, feugiat ullamcorper lorem. Nulla
-	malesuada vestibulum quam vitae rhoncus. Vestibulum sagittis
-	nisi varius sodales vulputate. Nulla eleifend nulla sed
-	magna lobortis luctus. Maecenas non commodo risus.
-	Vestibulum molestie luctus libero in rhoncus. Suspendisse
-	vitae fringilla lorem. Integer nec justo quis massa placerat
-	consectetur. Integer lobortis viverra dui, ac blandit ligula
-	lacinia convallis. Phasellus bibendum justo accumsan arcu
-	dignissim, eget sollicitudin quam sollicitudin. Praesent et
-	lacus mi. Praesent vel tristique ligula, sed laoreet ipsum.
-	Curabitur justo dui, pharetra non mattis non, malesuada sed
-	erat. Nunc eu euismod ante, ac porta diam.
+const PAGE_QUERY = gql`
+	query GetPageContentByLinkId($id: ID!) {
+		links(where: { id: $id }) {
+			id
+			title
+			page {
+				title
+				body {
+					... on Image {
+						title
+						image {
+							url
+						}
+					}
+					... on Textbox {
+						title
+						body {
+							text
+						}
+					}
+				}
+			}
+		}
+	}
 `;
 
-const Page: React.FC<PageProps> = ({ content }) => (
-	<StyledPageWrapper>
-		<StyledPage>
-			<Image />
-			<Textbox title={content.title} body={DUMMY_TEXT} />
-		</StyledPage>
-	</StyledPageWrapper>
-);
+function PageItem(props: PageItemProps) {
+	const { config } = props;
+
+	if (config.__typename === "Image") {
+		return <Image url={config.image.url} />;
+	} else if (config.__typename === "Textbox") {
+		return <Textbox title={config.title} body={config.body.text} />;
+	} 
+
+	return null;
+}
+
+function Page(props: PageProps) {
+	const { link } = props;
+	const { loading, error, data } = useQuery(PAGE_QUERY, {
+		variables: {
+			id: link.id,
+		},
+	});
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error :(</p>;
+	const page = _.get(data, 'links[0].page') || {};
+	const body = page.body || [];
+
+	return (
+		<StyledPageWrapper>
+			<StyledPage>
+				{body.map((item: any, index: number) => <PageItem key={index} config={item} />)}
+			</StyledPage>
+		</StyledPageWrapper>
+	);
+}
 
 export default Page;
