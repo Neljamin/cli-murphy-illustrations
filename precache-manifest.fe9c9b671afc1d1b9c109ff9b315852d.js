@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b692309b4b864370ece6b034597e991a",
+    "revision": "9b205966be8265ea229bf6ff8978dd9a",
     "url": "/cli-murphy-illustrations/index.html"
   },
   {
