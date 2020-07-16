@@ -2,9 +2,13 @@ import * as React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Loader } from 'semantic-ui-react';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface ImageProps {
 	url?: string;
+	name: string;
 }
 
 const StyledImageFrame = styled.div`
@@ -23,11 +27,9 @@ const StyledImageFrame = styled.div`
 	transform: rotate(1deg);
 `;
 
-const StyledImage = styled.div<ImageProps>`
-	background: url(${props => props.url});
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
+const StyledImage = styled(LazyLoadImage)`
+	object-fit: cover;
+	border: 1px solid #ccc;
 `;
 
 const StyledClip = styled.div`
@@ -46,11 +48,29 @@ const Clip = () => (
 	</StyledClip>
 );
 
-const Page: React.FC<ImageProps> = ({ url }) => (
-	<StyledImageFrame>
-		<StyledImage url={url} />
-		<Clip />
-	</StyledImageFrame>
-);
+function Image(props: ImageProps) {
+	const { url, name } = props;
+	console.log(url);
 
-export default Page;
+	fetch('https://media.graphcms.com/F5xO5PuUSxm5J7teaKPt')
+		.then(response => response.blob()
+			.then(blob => console.log(blob))
+		);
+
+	return (
+		<StyledImageFrame>
+			<StyledImage
+				alt={name}
+				height={'100%'}
+				width={'100%'}
+				effect="blur"
+				delayTime={1000}
+				src={url}
+				placeholder={<Loader />}
+			/>
+			<Clip />
+		</StyledImageFrame>
+	);
+  }
+
+export default Image;

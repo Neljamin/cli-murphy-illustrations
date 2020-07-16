@@ -1,99 +1,110 @@
 import * as React from "react";
-import * as _ from 'lodash';
+import * as _ from "lodash";
 import styled from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { Container, Grid, Loader } from "semantic-ui-react";
 
 import Image from "./Image";
 import Textbox from "./Textbox";
-import { breakpoints } from "../../../styles";
 
 interface PageProps {
-	link: any;
+  link: any;
 }
 
 interface PageItemProps {
-	config: any;
+  config: any;
 }
 
-const StyledPageWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+const StyledContainer = styled(Container)`
+  margin: 32px 0;
 `;
 
-const StyledPage = styled.div`
-	display: flex;
-	max-width: 800px;
-	padding: 8px;
-	margin: 16px 0 32px 0;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-
-	@media ${breakpoints.tablet} {
-		flex-direction: row;
-	}
+const PageItemContainer = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 0 16px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PAGE_QUERY = gql`
-	query GetPageContentByLinkId($id: ID!) {
-		links(where: { id: $id }) {
-			id
-			title
-			page {
-				title
-				body {
-					... on Image {
-						title
-						image {
-							url
-						}
-					}
-					... on Textbox {
-						title
-						body {
-							text
-						}
-					}
-				}
-			}
-		}
-	}
+  query GetPageContentByLinkId($id: ID!) {
+    links(where: { id: $id }) {
+      id
+      title
+      page {
+        title
+        body {
+          ... on Image {
+            title
+            image {
+              url
+            }
+          }
+          ... on Textbox {
+            title
+            body {
+              text
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 function PageItem(props: PageItemProps) {
-	const { config } = props;
+  const { config } = props;
 
-	if (config.__typename === "Image") {
-		return <Image url={config.image.url} />;
-	} else if (config.__typename === "Textbox") {
-		return <Textbox title={config.title} body={config.body.text} />;
-	} 
+  if (config.__typename === "Image") {
+    return (
+      <Grid.Column>
+        <PageItemContainer>
+          <Image name={config.title} url={config.image.url} />
+        </PageItemContainer>
+      </Grid.Column>
+    );
+  } else if (config.__typename === "Textbox") {
+    return (
+      <Grid.Column width={8}>
+        <PageItemContainer>
+          <Textbox title={config.title} body={config.body.text} />
+        </PageItemContainer>
+      </Grid.Column>
+    );
+  }
 
-	return null;
+  return null;
 }
 
 function Page(props: PageProps) {
-	const { link } = props;
-	const { loading, error, data } = useQuery(PAGE_QUERY, {
-		variables: {
-			id: link.id,
-		},
-	});
+  const { link } = props;
+  const { loading, error, data } = useQuery(PAGE_QUERY, {
+    variables: {
+      id: link.id,
+    },
+  });
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
-	const page = _.get(data, 'links[0].page') || {};
-	const body = page.body || [];
+  const page = _.get(data, "links[0].page") || {};
+  const body = page.body || [];
 
-	return (
-		<StyledPageWrapper>
-			<StyledPage>
-				{body.map((item: any, index: number) => <PageItem key={index} config={item} />)}
-			</StyledPage>
-		</StyledPageWrapper>
-	);
+  return (
+    <StyledContainer>
+      <Grid stackable columns={3}>
+        <Grid.Row>
+          {loading && <Loader />}
+          {error && <p>Error :(</p>}
+          {!loading &&
+            !error &&
+            body.map((item: any, index: number) => (
+              <PageItem key={index} config={item} />
+            ))}
+        </Grid.Row>
+      </Grid>
+    </StyledContainer>
+  );
 }
 
 export default Page;

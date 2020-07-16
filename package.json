@@ -47,6 +47,7 @@
     "@fortawesome/react-fontawesome": "^0.1.10",
     "@types/lodash": "^4.14.155",
     "@types/react-helmet": "^6.0.0",
+    "@types/react-lazy-load-image-component": "^1.5.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "apollo-boost": "^0.4.9",
@@ -54,7 +55,9 @@
     "graphql": "^15.1.0",
     "node-fetch": "^2.6.0",
     "react-helmet-async": "^1.0.6",
+    "react-lazy-load-image-component": "^1.5.0",
     "react-router-dom": "^5.2.0",
+    "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.1.1"
   }
 }
