@@ -35,13 +35,9 @@ const theme = {
             color: colors.blue,
             hoverBackground: applyAlpha(colors.blue, '33'),
         },
-        Illustrations: {
+        Artwork: {
             color: colors.darkGreen,
             hoverBackground: applyAlpha(colors.darkGreen, '33'),
-        },
-        Contact: {
-            color: colors.darkOrange,
-            hoverBackground: applyAlpha(colors.darkOrange, '33'),
         }
     },
 };

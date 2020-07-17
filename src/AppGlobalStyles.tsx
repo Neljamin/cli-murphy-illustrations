@@ -1,12 +1,19 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-    html * {
-        font-family: 'Poiret One', cursive;
+    html {
+        margin: 0;
+        padding: 0;
+
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
     }
 
     body {
         margin: 0;
+        min-height: 100vh;
+        overflow-y: scroll;
     }
 
     div {
@@ -14,7 +21,10 @@ export default createGlobalStyle`
         width: 100%;
     }
 
-    html,
+    #root {
+
+    }
+
     body,
     div,
     span,
@@ -101,7 +111,7 @@ export default createGlobalStyle`
         font-size: 100%;
         font: inherit;
         vertical-align: baseline;
-        font-family: 'Poiret One', cursive;
+        font-family: 'Open Sans', sans-serif;
         box-sizing: border-box;
     }
 
@@ -119,7 +129,7 @@ export default createGlobalStyle`
     nav,
     section {
         display: block;
-        font-family: 'Poiret One', cursive;
+        font-family: 'Open Sans', sans-serif;
     }
 
     body {

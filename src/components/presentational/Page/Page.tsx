@@ -7,6 +7,7 @@ import { Container, Grid, Loader } from "semantic-ui-react";
 
 import Image from "./Image";
 import Textbox from "./Textbox";
+import Book from "./Book";
 
 interface PageProps {
   link: any;
@@ -29,6 +30,11 @@ const PageItemContainer = styled.div`
   align-items: center;
 `;
 
+const PageRow = styled(Grid.Row)`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const PAGE_QUERY = gql`
   query GetPageContentByLinkId($id: ID!) {
     links(where: { id: $id }) {
@@ -46,7 +52,14 @@ const PAGE_QUERY = gql`
           ... on Textbox {
             title
             body {
-              text
+              html
+            }
+            showSocials
+          }
+          ... on Book {
+            title
+            coverImage {
+              url
             }
           }
         }
@@ -70,7 +83,15 @@ function PageItem(props: PageItemProps) {
     return (
       <Grid.Column width={8}>
         <PageItemContainer>
-          <Textbox title={config.title} body={config.body.text} />
+          <Textbox title={config.title} html={config.body.html} showSocials={config.showSocials} />
+        </PageItemContainer>
+      </Grid.Column>
+    );
+  } else if (config.__typename === "Book") {
+    return (
+      <Grid.Column >
+        <PageItemContainer>
+          <Book title={config.title} coverImageUrl={config.coverImage.url} />
         </PageItemContainer>
       </Grid.Column>
     );
@@ -93,7 +114,7 @@ function Page(props: PageProps) {
   return (
     <StyledContainer>
       <Grid stackable columns={3}>
-        <Grid.Row>
+        <PageRow>
           {loading && <Loader />}
           {error && <p>Error :(</p>}
           {!loading &&
@@ -101,7 +122,7 @@ function Page(props: PageProps) {
             body.map((item: any, index: number) => (
               <PageItem key={index} config={item} />
             ))}
-        </Grid.Row>
+        </PageRow>
       </Grid>
     </StyledContainer>
   );

@@ -50,12 +50,6 @@ const Clip = () => (
 
 function Image(props: ImageProps) {
 	const { url, name } = props;
-	console.log(url);
-
-	fetch('https://media.graphcms.com/F5xO5PuUSxm5J7teaKPt')
-		.then(response => response.blob()
-			.then(blob => console.log(blob))
-		);
 
 	return (
 		<StyledImageFrame>

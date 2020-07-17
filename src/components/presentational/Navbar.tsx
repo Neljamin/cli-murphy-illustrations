@@ -51,6 +51,9 @@ const StyledNavbarLink = styled.div<StyledLinkProps>`
 
     &:hover {
         background-color: ${props => _.get(props, `theme.links.${props.name}.hoverBackground`)};
+        a {
+            color: ${props => _.get(props, `theme.links.${props.name}.color`)};
+        }
     }
 
     a {
@@ -61,7 +64,7 @@ const StyledNavbarLink = styled.div<StyledLinkProps>`
         padding-bottom: 16px;
         text-decoration: none;
         justify-content: center;
-        font-weight: 900;
+        font-weight: 600;
         color: ${props => _.get(props, `theme.links.${props.name}.color`)};
     }
 `;
