@@ -30,6 +30,7 @@ const StyledTextbox = styled.div`
 const SocialsRow = styled.div`
 	display: flex;
 	margin: 16px 0;
+	margin-top: 48px;
 	justify-content: center;
 	align-items: center;
 `;

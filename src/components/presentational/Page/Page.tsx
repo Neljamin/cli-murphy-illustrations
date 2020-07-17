@@ -25,7 +25,6 @@ const PageItemContainer = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  padding: 0 16px;
   justify-content: center;
   align-items: center;
 `;
@@ -81,7 +80,7 @@ function PageItem(props: PageItemProps) {
     );
   } else if (config.__typename === "Textbox") {
     return (
-      <Grid.Column width={8}>
+      <Grid.Column width={10}>
         <PageItemContainer>
           <Textbox title={config.title} html={config.body.html} showSocials={config.showSocials} />
         </PageItemContainer>
@@ -89,7 +88,7 @@ function PageItem(props: PageItemProps) {
     );
   } else if (config.__typename === "Book") {
     return (
-      <Grid.Column >
+      <Grid.Column width={6}>
         <PageItemContainer>
           <Book title={config.title} coverImageUrl={config.coverImage.url} />
         </PageItemContainer>
