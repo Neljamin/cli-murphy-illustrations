@@ -18,6 +18,7 @@ interface PageItemProps {
 }
 
 const StyledContainer = styled(Container)`
+  min-height: calc(100vh - 378px);
   margin: 32px 0;
 `;
 

@@ -6,7 +6,7 @@ import { ApolloProvider, useQuery } from "@apollo/react-hooks";
 
 import AppHelmet from "./AppHelmet";
 import AppGlobalStyles from "./AppGlobalStyles";
-import { Banner, Navbar, Page } from "./components/presentational";
+import { Banner, Navbar, Page, Footer } from "./components/presentational";
 import { theme } from "./styles";
 import ApolloClient, { gql } from "apollo-boost";
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
@@ -60,6 +60,7 @@ function App() {
 					<Page link={link} />
 				</Route>
 			))}
+			<Footer />
 		</Router>
 	);
 }
