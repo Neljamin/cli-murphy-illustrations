@@ -1,15 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-
+import IconLink from "./IconLink";
 import { breakpoints } from '../../../styles';
 
 interface ImageProps {
 	title: string;
 	html: any;
-	showSocials?: boolean;
+	iconLinks?: Array<any>;
 }
 
 const StyledTextbox = styled.div`
@@ -45,51 +42,15 @@ const SocialsColumn = styled.div`
 	}
 `;
 
-interface StyledAnchorProps {
-	color: string;
-}
-
-const StyledAnchor = styled.a<StyledAnchorProps>`
-	border: none;
-	background: transparent;
-	font-size: 28px;
-	cursor: pointer;
-	color: ${props => props.color};
-
-	&:hover {
-		color: ${props => props.color};
-	}
-`;
-
-const Facebook = () => (
-	<StyledAnchor href="https://www.facebook.com/CliodhnaMurphy" color='#13a3fa'>
-		<FontAwesomeIcon icon={faFacebook} />
-	</StyledAnchor>
-);
-
-const Mail = () => (
-	<StyledAnchor href="mailto:cli.murphy58@gmail.com" color='#c54b43'>
-		<FontAwesomeIcon icon={faEnvelope} />
-	</StyledAnchor>
-);
-
-const Instagram = () => (
-	<StyledAnchor href="https://www.instagram.com/climurphyillustrations/" color='#dc498d'>
-		<FontAwesomeIcon icon={faInstagram} />
-	</StyledAnchor>
-);
-
-const Textbox: React.FC<ImageProps> = ({ title, html, showSocials = false }) => (
+const Textbox: React.FC<ImageProps> = ({ title, html, iconLinks = [] }) => (
 	<StyledTextbox>
 		<h2>{title}</h2>
 		<div dangerouslySetInnerHTML={{ __html: html }} />
 		{
-			showSocials && 
+			iconLinks && 
 			<SocialsRow >
 				<SocialsColumn>
-					<Facebook />
-					<Mail />
-					<Instagram />
+					{iconLinks.map((iconLink: any) => <IconLink key={iconLink.name} type={iconLink.name} url={iconLink.url} />)}
 				</SocialsColumn>
 			</SocialsRow>
 		}

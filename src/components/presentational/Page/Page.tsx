@@ -53,7 +53,10 @@ const PAGE_QUERY = gql`
             body {
               html
             }
-            showSocials
+            iconLinks {
+              name
+              url
+            }
           }
           ... on Book {
             title
@@ -82,7 +85,7 @@ function PageItem(props: PageItemProps) {
     return (
       <Grid.Column width={10}>
         <PageItemContainer>
-          <Textbox title={config.title} html={config.body.html} showSocials={config.showSocials} />
+          <Textbox title={config.title} html={config.body.html} iconLinks={config.iconLinks} />
         </PageItemContainer>
       </Grid.Column>
     );
