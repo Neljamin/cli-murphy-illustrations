@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6684675b3d8886d634893d055e86e57e",
+    "revision": "7b88949d1598d47d27dbb1ec2c5407b3",
     "url": "/cli-murphy-illustrations/index.html"
   },
   {
-    "revision": "0880a9746c02ef7d4fa1",
+    "revision": "f890b4f052317800bc5a",
     "url": "/cli-murphy-illustrations/static/css/2.9905d55a.chunk.css"
   },
   {
-    "revision": "b4f79a13c38b5d803183",
+    "revision": "8a8018474ff6994c876d",
     "url": "/cli-murphy-illustrations/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "0880a9746c02ef7d4fa1",
-    "url": "/cli-murphy-illustrations/static/js/2.551b29a6.chunk.js"
+    "revision": "f890b4f052317800bc5a",
+    "url": "/cli-murphy-illustrations/static/js/2.44b67721.chunk.js"
   },
   {
     "revision": "572bfeb62474f0cec44e259ca5a99f18",
-    "url": "/cli-murphy-illustrations/static/js/2.551b29a6.chunk.js.LICENSE.txt"
+    "url": "/cli-murphy-illustrations/static/js/2.44b67721.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b4f79a13c38b5d803183",
-    "url": "/cli-murphy-illustrations/static/js/main.5ec237b6.chunk.js"
+    "revision": "8a8018474ff6994c876d",
+    "url": "/cli-murphy-illustrations/static/js/main.e263ec2e.chunk.js"
   },
   {
     "revision": "4bdc7cf202207e7e5b59",
