@@ -118,7 +118,7 @@ function Page(props: PageProps) {
     <StyledContainer>
       <Grid stackable columns={3}>
         <PageRow>
-          {loading && <Loader />}
+          {loading && <Loader active />}
           {error && <p>Error :(</p>}
           {!loading &&
             !error &&

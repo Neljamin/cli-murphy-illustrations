@@ -11,6 +11,7 @@ import { theme } from "./styles";
 import ApolloClient, { gql } from "apollo-boost";
 import { IntrospectionFragmentMatcher, InMemoryCache } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from './fragmentTypes.json';
+import { Loader } from "semantic-ui-react";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   	introspectionQueryResultData
@@ -42,7 +43,7 @@ const APP_STRUCTURE_QUERY = gql`
 function App() {
 	const { loading, error, data } = useQuery(APP_STRUCTURE_QUERY);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <Loader active />;
 	if (error) return <p>Error :(</p>;
 
 	const { banners, links } = data;

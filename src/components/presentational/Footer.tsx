@@ -15,8 +15,7 @@ const StyledAnchor = styled.a`
     }
 `;
 
-const Footer: React.FC = ({
-}) => (
+const Footer: React.FC = () => (
     <StyledFooter>
         <StyledAnchor href="https://www.linkedin.com/in/aodhag%C3%A1n-murphy-43b9955a/">Site by Aodhagán Murphy</StyledAnchor>
     </StyledFooter>

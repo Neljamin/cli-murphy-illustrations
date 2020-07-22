@@ -10,6 +10,7 @@ interface BookProps {
 
 const StyledBook = styled.div`
 	display: flex;
+	min-height: 200px;
 	border: 1px solid #ccc;
 	box-shadow: 5px 10px #eee;
 `;
@@ -27,7 +28,7 @@ const Book: React.FC<BookProps> = ({ title, coverImageUrl }) => (
 			effect="blur"
 			delayTime={1000}
 			src={coverImageUrl}
-			placeholder={<Loader />}
+			placeholder={<Loader active />}
 		/>
 	</StyledBook>
 );

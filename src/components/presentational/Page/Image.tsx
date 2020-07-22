@@ -24,7 +24,6 @@ const StyledImageFrame = styled.div`
 	background-color: white;
 	border: 1px solid #ccc;
 	box-shadow: rgba(0,0,0,0.22) 4px 4px 0px 0px;
-	transform: rotate(1deg);
 `;
 
 const StyledImage = styled(LazyLoadImage)`
@@ -60,7 +59,7 @@ function Image(props: ImageProps) {
 				effect="blur"
 				delayTime={1000}
 				src={url}
-				placeholder={<Loader />}
+				placeholder={<Loader active />}
 			/>
 			<Clip />
 		</StyledImageFrame>
