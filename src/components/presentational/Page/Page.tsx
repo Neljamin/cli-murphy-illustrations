@@ -33,6 +33,7 @@ const PageItemContainer = styled.div`
 const PageRow = styled(Grid.Row)`
   display: flex;
   justify-content: space-around;
+  min-height: 200px;
 `;
 
 const PAGE_QUERY = gql`
