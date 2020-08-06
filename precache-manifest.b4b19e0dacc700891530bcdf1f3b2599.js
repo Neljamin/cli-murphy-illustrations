@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f36b2d0d5bc25ac239f9a0a5f9c07d80",
+    "revision": "67b0373bde637491bc2e73ec3496f4e7",
     "url": "/cli-murphy-illustrations/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cli-murphy-illustrations/static/css/2.9905d55a.chunk.css"
   },
   {
-    "revision": "c98460582aaef62518b4",
+    "revision": "2616d1cd6781d3910472",
     "url": "/cli-murphy-illustrations/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cli-murphy-illustrations/static/js/2.44b67721.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c98460582aaef62518b4",
-    "url": "/cli-murphy-illustrations/static/js/main.90421f4d.chunk.js"
+    "revision": "2616d1cd6781d3910472",
+    "url": "/cli-murphy-illustrations/static/js/main.7c573f5a.chunk.js"
   },
   {
     "revision": "4bdc7cf202207e7e5b59",
