@@ -67,7 +67,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
 const IconLink: React.FC<IconLinkProps> = ({ type, url }) => {
 	const { color, icon, variant } = ICON_MAP[type];
 	return (
-		<StyledAnchor variant={variant} href={url} color={color}>
+		<StyledAnchor variant={variant} href={url} color={color} target="_blank">
 			<FontAwesomeIcon icon={icon} />
 		</StyledAnchor>
 	);
