@@ -3,5 +3,5 @@
   X-XSS-Protection: 1; mode=block
   Content-Security-Policy: default-src 'self' *.graphcms.com
   X-Content-Type-Options: nosniff
-  Referrer-Policy: origin
+  Referrer-Policy: no-referrer-when-downgrade
   Feature-Policy: microphone 'none'; geolocation 'none'
