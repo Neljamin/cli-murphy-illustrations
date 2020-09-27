@@ -1,26 +1,26 @@
-import * as React from "react";
-import * as _ from "lodash";
-import styled from "styled-components";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import { Container, Grid, Loader } from "semantic-ui-react";
+import * as React from "react"
+import * as _ from "lodash"
+import styled from "styled-components"
+import { useQuery } from "@apollo/react-hooks"
+import { gql } from "apollo-boost"
+import { Container, Grid, Loader } from "semantic-ui-react"
 
-import Image from "./Image";
-import Textbox from "./Textbox";
-import Book from "./Book";
+import Image from "./Image"
+import Textbox from "./Textbox"
+import Book from "./Book"
 
 interface PageProps {
-  link: any;
+  link: any
 }
 
 interface PageItemProps {
-  config: any;
+  config: any
 }
 
 const StyledContainer = styled(Container)`
   min-height: calc(100vh - 378px);
   margin: 32px 0;
-`;
+`
 
 const PageItemContainer = styled.div`
   display: flex;
@@ -28,13 +28,13 @@ const PageItemContainer = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const PageRow = styled(Grid.Row)`
   display: flex;
   justify-content: space-around;
   min-height: 200px;
-`;
+`
 
 const PAGE_QUERY = gql`
   query GetPageContentByLinkId($id: ID!) {
@@ -46,7 +46,11 @@ const PAGE_QUERY = gql`
         body {
           ... on Image {
             title
+            downloadable
             image {
+              url
+            }
+            downloadImage {
               url
             }
           }
@@ -70,27 +74,36 @@ const PAGE_QUERY = gql`
       }
     }
   }
-`;
+`
 
 function PageItem(props: PageItemProps) {
-  const { config } = props;
+  const { config } = props
 
   if (config.__typename === "Image") {
     return (
       <Grid.Column>
         <PageItemContainer>
-          <Image name={config.title} url={config.image.url} />
+          <Image
+            name={config.title}
+            url={config.image.url}
+            downloadUrl={config?.downloadImage?.url}
+            downloadable={config.downloadable}
+          />
         </PageItemContainer>
       </Grid.Column>
-    );
+    )
   } else if (config.__typename === "Textbox") {
     return (
       <Grid.Column width={10}>
         <PageItemContainer>
-          <Textbox title={config.title} html={config.body.html} iconLinks={config.iconLinks} />
+          <Textbox
+            title={config.title}
+            html={config.body.html}
+            iconLinks={config.iconLinks}
+          />
         </PageItemContainer>
       </Grid.Column>
-    );
+    )
   } else if (config.__typename === "Book") {
     return (
       <Grid.Column width={6}>
@@ -98,22 +111,22 @@ function PageItem(props: PageItemProps) {
           <Book title={config.title} coverImageUrl={config.coverImage.url} />
         </PageItemContainer>
       </Grid.Column>
-    );
+    )
   }
 
-  return null;
+  return null
 }
 
 function Page(props: PageProps) {
-  const { link } = props;
+  const { link } = props
   const { loading, error, data } = useQuery(PAGE_QUERY, {
     variables: {
-      id: link.id,
-    },
-  });
+      id: link.id
+    }
+  })
 
-  const page = _.get(data, "links[0].page") || {};
-  const body = page.body || [];
+  const page = _.get(data, "links[0].page") || {}
+  const body = page.body || []
 
   return (
     <StyledContainer>
@@ -129,7 +142,7 @@ function Page(props: PageProps) {
         </PageRow>
       </Grid>
     </StyledContainer>
-  );
+  )
 }
 
-export default Page;
+export default Page
